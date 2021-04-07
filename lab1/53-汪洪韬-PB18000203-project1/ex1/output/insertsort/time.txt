@@ -1,0 +1,6 @@
+8 numbers cost 0.200000us
+64 numbers cost 2.900000us
+512 numbers cost 137.000000us
+4096 numbers cost 10705.700000us
+32768 numbers cost 652233.500000us
+262144 numbers cost 38154762.000000us
