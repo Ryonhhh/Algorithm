@@ -1,0 +1,5 @@
+5 data's deleting cost 2.157000us
+10 data's deleting cost 5.434000us
+15 data's deleting cost 10.458000us
+20 data's deleting cost 16.959000us
+25 data's deleting cost 25.150000us

@@ -1,0 +1,5 @@
+20 data's inserting cost 7.724000us
+40 data's inserting cost 25.647000us
+60 data's inserting cost 50.109000us
+80 data's inserting cost 82.504000us
+100 data's inserting cost 124.762000us

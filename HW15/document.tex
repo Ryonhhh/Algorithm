@@ -1,0 +1,109 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{geometry}
+\usepackage{indentfirst}
+\usepackage{latexsym}
+\usepackage{cases}
+\makeatletter
+\@namedef{ver@amsmath.sty}{}
+\makeatother
+\usepackage{amstext}
+\usepackage{color}
+
+\geometry{a4paper,scale=0.8}
+\title{算法基础HW15}
+\author{PB18000203 汪洪韬}
+\date{\today}
+\begin{document}
+\maketitle
+
+    ~\\
+	\textbf{32.3-3} \quad 如果由$P_k \supseteq P_q$导出$k=0$或$k=q$，则称模式P是\textbf{不可重叠的}。试描述与不可重叠模式相应的字符串匹配自动机的状态转换图。\\
+	\textbf{solution:} \\  
+	\indent\setlength{\parindent}{1em}状态转换图中，若状态返回，只会返回到第一个点（若当前字母不为模式第一个字母），或者返回到第二个点（当前字母为模式的第一个字母）。\\\\\\
+	
+	\noindent\textbf{32.4-2} \quad 给出关于q的函数 $\pi^*[q]$ 的规模的上界。举例说明所给出的上界是严格的。\\
+	\textbf{solution:} \\ 
+	\indent\setlength{\parindent}{1em}上界为模式P的长度。举例：对于一个字符全相同的模式P，如$P=aa\cdots a$，长度为m，由定义 $\pi^*[q]$，则 $\pi^*[q] = \{0,1,2,\cdots ,m-1\}$，规模为m。\\\\\\
+	
+	\noindent\textbf{32.4-6} \quad 试说明如何通过以下方式对过程KMP-MATCHER进行改进：把第七行（不是第12行中）出现的$\pi$替换为$\pi^\prime$，其中对于$q=1,2,\cdots ,m-1,\pi^\prime$递归定义如下：
+	\begin{center}
+	$$\pi^\prime[q]=\left\{
+	\begin{array}{rcl}
+		0,                            &  {if \quad \pi[q]=0} \\
+		\pi'[\pi[q]],                 &  {if \quad \pi[q]\ne0 \&\& P[\pi[q]+1]=P[q+1]} \\
+		\pi[q],                       &  {if \quad \pi[q]\ne0 \&\& P[\pi[q]+1]\ne P[q+1]}
+	\end{array}\right.$$
+    \end{center}
+	~\\试说明为什么修改后的算法是正确的，并说明在何种意义上，这一修改是对原算法的改进。\\
+	\noindent\textbf{solution:} \\  
+	\indent\setlength{\parindent}{1em}只需证明在结束6，7行的循环后，$q$的值与修改前循环后得到的值不变即可。第6,7行while循环的作用是：当匹配$P[q+1]\ne T[i]$时，寻找最大的k满足：$k < q$ \&\& $P_k$是$P_q$的后缀，同时，要求$P[k+1] == T[i]$。
+	而$\pi^\prime$与$\pi$不同的是，它仅仅选择寻找最大的k，满足$k < q$ \&\& $P_k$是$P_q$的后缀，$P[k+1] \ne P[q+1]$。所以$\pi^\prime*[q]$是$\pi^*[q]$的子集，其去除了其中$P[k+1] == P[q+1]$的部分。所以$\pi^\prime*[q]$的遍历直接跳过了$P[k+1] == P[q+1]$的$k$值，这样就对算法进行了优化。\\\\\\
+    
+    \noindent\textbf{EX} \quad 已知：\\
+        $T[1\cdots 30]$=ACGCTDAGAAGDCAGADGTDAGCDGDAGC.\\
+        $P[1\cdots10]$=DAGCDGDAGC.\\
+    	\noindent1.计算Shift Or 算法中的$S_c$数组$(S[T(i)])t$和$R$数组$(state)$变换的情况（给出表格）,\\
+    	2.给出$QS$算法中的$Q_s-B_c$数组，计算$QS$算法找到第1个成功匹配所需的字符比较次数；\\
+
+    \noindent\textbf{solution:} \\  
+    1.
+    \begin{center}
+    	\begin{tabular}{|cc|}
+    			\hline 
+    			$S_A[10\cdots1]=$&$(11011111011110111110010111111)$\\
+    			\hline
+    			$S_C[10\cdots1]=$&$(01111101111111110111111110101)$\\
+    			\hline
+    			$S_D[10\cdots1]=$&$(11101011101101111011111011111)$\\
+    			\hline
+    			$S_G[10\cdots1]=$&$(10110110111011011101101111011)$\\
+    			\hline
+    			$S_T[10\cdots1]=$&$(11111111110111111111111101111)$\\
+    			\hline
+    	\end{tabular}
+    \end{center}
+
+    \begin{table}[htbp]	\resizebox{\textwidth}{!}{
+        \begin{tabular}{|cc|ccccccccccccccccccccccccccccc|}
+    	\hline 
+    	&&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20&21&22&23&24&25&26&27&28&29\\
+    	&&A&C&G&C&T&D&A&G&A&A&G&D&C&A&G&A&D&G&T&D&A&G&C&D&G&D&A&G&C\\
+    	\hline 
+    	1&D&1&1&1&1&1&0&1&1&1&1&1&0&1&1&1&1&0&1&1&0&1&1&1&0&1&0&1&1&1\\
+    	2&A&1&1&1&1&1&1&0&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1&1&1&0&1&1\\
+    	3&G&1&1&1&1&1&1&1&0&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1&1&1&0&1\\
+    	4&C&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1&1&1&0\\
+    	5&D&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1&1&1\\
+    	6&G&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1&1\\
+    	7&D&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1&1\\
+    	8&A&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1&1\\
+    	9&G&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0&1\\
+    	10&C&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&1&0\\
+    	\hline
+        \end{tabular}}
+    \end{table}
+    2.
+    \begin{center}
+    	P=DAGCDGDAGC\\
+    	\begin{tabular}{|c|ccccc|}
+    		\hline
+    		&A&C&D&G&T\\
+    		\hline
+    		$Q_s-B_c$&3&1&4&2&11\\
+    		\hline
+    	\end{tabular}
+    ~\\compare 1 characters, $Q_s-B_c[G]$, shitf by 2; \\
+    compare 1 characters, $Q_s-B_c[C]$, shift by 1;\\
+    compare 1 characters, $Q_s-B_c[A]$, shitf by 3; \\
+    compare 1 characters, $Q_s-B_c[D]$, shift by 4;\\
+    compare 1 characters, $Q_s-B_c[A]$, shitf by 3; \\
+    compare 1 characters, $Q_s-B_c[D]$, shift by 4;\\
+    compare 1 characters, $Q_s-B_c[A]$, shitf by 3; \\
+    compare 10 characters, find the match;\\
+    the algorithm end, performs 17 charater comparasions.
+    \end{center}
+
+\end{document}}

@@ -1,0 +1,8 @@
+27 vers with 2 arcs cost 32478.800000us
+81 vers with 2 arcs cost 884937.200000us
+243 vers with 3 arcs cost 20063052.300000us
+729 vers with 4 arcs cost 581556074.200000us
+27 vers with 1 arcs cost 27744.800000us
+81 vers with 2 arcs cost 754043.500000us
+243 vers with 2 arcs cost 20160034.200000us
+729 vers with 3 arcs cost 564922708.300000us

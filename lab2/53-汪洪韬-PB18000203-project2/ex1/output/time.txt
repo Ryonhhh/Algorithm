@@ -1,0 +1,5 @@
+5 matrixes cost 0.400000us
+10 matrixes cost 2.200000us
+15 matrixes cost 5.600000us
+20 matrixes cost 11.200000us
+25 matrixes cost 20.500000us

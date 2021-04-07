@@ -1,0 +1,4 @@
+8 data's inserting cost 106.200000us
+64 data's inserting cost 3341.200000us
+128 data's inserting cost 15794.400000us
+512 data's inserting cost 183918.500000us

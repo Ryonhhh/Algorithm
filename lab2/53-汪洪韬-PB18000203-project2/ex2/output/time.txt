@@ -1,0 +1,6 @@
+8 data size cost 12.500000us
+16 data size cost 12.900000us
+32 data size cost 15.600000us
+64 data size cost 40.800000us
+128 data size cost 80.000000us
+256 data size cost 150.100000us

@@ -1,0 +1,5 @@
+search intervals:[5, 5] [26, 28] [34, 40] 
+[5, 5] is overlaped by [4, 16]
+[26, 28]is not found!
+[34, 40] is overlaped by [36, 45]
+
